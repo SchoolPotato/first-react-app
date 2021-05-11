@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+// Unbelievably basic footer linking to the about page
 const Footer = () => {
     return (
         <footer>

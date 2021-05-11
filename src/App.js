@@ -1,16 +1,24 @@
+// Importing useState and useEffect from react so I can use it to change the server's state
+// Pretty sure this is used in all of my functions to change things
 import { useState, useEffect } from 'react'
+// Importing react's router dom so I can use it to change pages without a refresh
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+// Importing all of my website components
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import About from './components/About'
 
+// Beginning of the app
 const App = () => {
+  // Making the ability to access tasks
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
+    // asyncronous function to get and set tasks from the server
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks()
       setTasks(tasksFromServer);
@@ -28,7 +36,7 @@ const App = () => {
     return data;
   }
 
-  // Fetch Task
+  // Fetch individual Task
   const fetchTask = async (id) => {
     const res = await fetch(`http://localhost:5000/tasks/${id}`);
     const data = await res.json();
@@ -79,6 +87,7 @@ const App = () => {
   }
 
   return (
+    // Use the router so I can change this section of the code with it
     <Router>
       <div className="container">
         <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
